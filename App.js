@@ -6,53 +6,84 @@
  * @flow
  */
 
- import React, {Component} from 'react';
- import {Platform, StyleSheet, Text, View} from 'react-native';
- import { Button } from 'react-native-elements';
- import Icon from 'react-native-vector-icons/FontAwesome';
+import React, { Component, useState } from "react";
+import { StyleSheet, Text, View, FlatList} from "react-native";
+import { Button, ListItem } from "react-native-elements";
+import Icon from "react-native-vector-icons/FontAwesome";
 
- const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-  'Double tap R on your keyboard to reload,\n' +
-  'Shake or press menu button for dev menu',
-});
+export default function App() {
+  const [projects, setProjects] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
- type Props = {};
- export default class App extends Component<Props> {
-  render() {
-    return (
-      <View style={styles.container}>
+  trimAbstract = (str) => {
+    if(!str || str.length <= 80) return str;
+    else return str.substring(0,80);
+  };
 
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+  fetchData = async () => {
+    fetch("https://give.imb.org/api/projects", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => response.json())
+      .then(responseJson => {
+        setProjects(responseJson);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
 
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.welcome}>Welcome to Tada!</Text>
         <Button
-          title="Click Me"
+          title="View Projects"
           type="outline"
+          onPress={this.fetchData.bind(this)}
         />
-
       </View>
-    );
-  }
+      <FlatList
+        data={projects}
+        keyExtractor={item => item.id.toString()}
+        renderItem={({item}) =>
+          <ListItem
+            key={item.id}
+            leftAvatar={{ source: { uri: item.url } }}
+            title={item.title}
+            subtitle={
+              <Text style={styles.abstract}>
+                {trimAbstract(item.abstract)}
+              </Text>
+            }
+          />
+        }
+      />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: "#F5FCFF"
   },
   welcome: {
     fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+    textAlign: "center",
+    margin: 10
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  header: {
+    marginTop: 40,
+    marginBottom: 20,
+    justifyContent: "center",
+    alignItems: "center",
   },
+  abstract: {
+    fontSize: 12,
+    color: "#868686"
+  }
 });
