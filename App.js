@@ -23,6 +23,10 @@ export default function App() {
     }
   };
 
+  filterProjects = (projects) => {
+    return projects.filter((item) => item.event_project == true);
+  }
+
   fetchData = async () => {
     fetch("https://give.imb.org/api/projects", {
       method: "GET",
@@ -32,7 +36,7 @@ export default function App() {
     })
       .then(response => response.json())
       .then(responseJson => {
-        setProjects(responseJson);
+        setProjects(filterProjects(responseJson));
         setIsLoading(false);
       })
       .catch(error => {
