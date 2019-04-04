@@ -15,9 +15,12 @@ export default function App() {
   const [projects, setProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  trimAbstract = (str) => {
+  truncateAbstract = (str) => {
     if(!str || str.length <= 80) return str;
-    else return str.substring(0,80);
+    else{
+      var sub = str.substring(0, 80);
+      return sub.substring(0, sub.lastIndexOf(" "))+"...";
+    }
   };
 
   fetchData = async () => {
@@ -54,11 +57,9 @@ export default function App() {
             key={item.id}
             leftAvatar={{ source: { uri: item.url } }}
             title={item.title}
-            subtitle={
-              <Text style={styles.abstract}>
-                {trimAbstract(item.abstract)}
-              </Text>
-            }
+            subtitle={truncateAbstract(item.abstract)}
+            subtitleStyle={styles.abstract}
+            chevron
           />
         }
       />
