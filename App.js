@@ -7,7 +7,7 @@
  */
 
 import React, { Component, useState } from "react";
-import { StyleSheet, Text, View, FlatList} from "react-native";
+import { StyleSheet, Text, View, FlatList, ActivityIndicator } from "react-native";
 import { Button, ListItem } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 
@@ -19,7 +19,7 @@ export default function App() {
     if(!str || str.length <= 80) return str;
     else{
       var sub = str.substring(0, 80);
-      return sub.substring(0, sub.lastIndexOf(" "))+"...";
+      return sub.substring(0, sub.lastIndexOf(" ")) + "...";
     }
   };
 
@@ -33,22 +33,38 @@ export default function App() {
       .then(response => response.json())
       .then(responseJson => {
         setProjects(responseJson);
+        setIsLoading(false);
       })
       .catch(error => {
         console.error(error);
       });
   };
 
+  fetchProject = () => {
+    setIsLoading(true);
+    fetchData();
+  }
+
+  buttonOrLoading = () => {
+    if(!isLoading){
+      return (
+        <Button
+          title="View Projects"
+          type="outline"
+          onPress={this.fetchProject.bind(this)}
+        />
+      );
+    }
+    else return (<ActivityIndicator size="large" color="#868686"/>);
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.welcome}>Welcome to Tada!</Text>
-        <Button
-          title="View Projects"
-          type="outline"
-          onPress={this.fetchData.bind(this)}
-        />
+        {buttonOrLoading()}
       </View>
+      
       <FlatList
         data={projects}
         keyExtractor={item => item.id.toString()}
