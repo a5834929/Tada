@@ -1,3 +1,5 @@
 rootProject.name = 'Tada'
+include ':react-native-auth-net-sdk'
+project(':react-native-auth-net-sdk').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-auth-net-sdk/android')
 
 include ':app'
