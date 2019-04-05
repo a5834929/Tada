@@ -1,31 +1,30 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React, { Component, useState } from "react";
-import { StyleSheet, Text, View, FlatList, ActivityIndicator } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  ActivityIndicator,
+  Alert
+} from "react-native";
 import { Button, ListItem } from "react-native-elements";
-import Icon from "react-native-vector-icons/FontAwesome";
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 
-export default function App() {
+export default function Home() {
   const [projects, setProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  truncateAbstract = (str) => {
-    if(!str || str.length <= 80) return str;
-    else{
+  truncateAbstract = str => {
+    if (!str || str.length <= 80) return str;
+    else {
       var sub = str.substring(0, 80);
       return sub.substring(0, sub.lastIndexOf(" ")) + "...";
     }
   };
 
-  filterProjects = (projects) => {
-    return projects.filter((item) => item.event_project == true);
-  }
+  filterProjects = projects => {
+    return projects.filter(item => item.is_active == true);
+  };
 
   fetchData = async () => {
     fetch("https://give.imb.org/api/projects", {
@@ -47,10 +46,10 @@ export default function App() {
   fetchProject = () => {
     setIsLoading(true);
     fetchData();
-  }
+  };
 
   buttonOrLoading = () => {
-    if(!isLoading){
+    if (!isLoading) {
       return (
         <Button
           title="View Projects"
@@ -58,9 +57,12 @@ export default function App() {
           onPress={this.fetchProject.bind(this)}
         />
       );
-    }
-    else return (<ActivityIndicator size="large" color="#868686"/>);
-  }
+    } else return <ActivityIndicator size="large" color="#868686" />;
+  };
+
+  alertProject = lmcid => {
+    Alert.alert(lmcid);
+  };
 
   return (
     <View style={styles.container}>
@@ -68,11 +70,11 @@ export default function App() {
         <Text style={styles.welcome}>Welcome to Tada!</Text>
         {buttonOrLoading()}
       </View>
-      
+
       <FlatList
         data={projects}
         keyExtractor={item => item.id.toString()}
-        renderItem={({item}) =>
+        renderItem={({ item }) => (
           <ListItem
             key={item.id}
             leftAvatar={{ source: { uri: item.url } }}
@@ -80,8 +82,10 @@ export default function App() {
             subtitle={truncateAbstract(item.abstract)}
             subtitleStyle={styles.abstract}
             chevron
+            bottomDivider
+            onPress={() => this.alertProject(item.lmcid)}
           />
-        }
+        )}
       />
     </View>
   );
@@ -101,7 +105,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
     marginBottom: 20,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "center"
   },
   abstract: {
     fontSize: 12,
