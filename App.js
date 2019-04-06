@@ -8,7 +8,7 @@ import {
   Alert
 } from "react-native";
 import { Button, ListItem } from "react-native-elements";
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { createStackNavigator, createAppContainer } from "react-navigation";
 
 export default function Home() {
   const [projects, setProjects] = useState([]);
@@ -81,6 +81,7 @@ export default function Home() {
             title={item.title}
             subtitle={truncateAbstract(item.abstract)}
             subtitleStyle={styles.abstract}
+            containerStyle={{backgroundColor: '#F5FCFF'}}
             chevron
             bottomDivider
             onPress={() => this.alertProject(item.lmcid)}
@@ -94,7 +95,7 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F5FCFF"
+    backgroundColor: "#EAF5FF"
   },
   welcome: {
     fontSize: 20,
