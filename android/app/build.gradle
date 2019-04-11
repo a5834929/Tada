@@ -150,6 +150,8 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-uuid-generator')
+    implementation project(':@react-native-community_async-storage')
     api project(':react-native-auth-net-sdk')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"

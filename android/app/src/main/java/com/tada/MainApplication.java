@@ -3,6 +3,8 @@ package com.tada;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import io.github.traviskn.rnuuidgenerator.RNUUIDGeneratorPackage;
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.reactlibrary.RNAuthNetSdkPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -24,6 +26,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNUUIDGeneratorPackage(),
+            new AsyncStoragePackage(),
             new RNAuthNetSdkPackage()
       );
     }
