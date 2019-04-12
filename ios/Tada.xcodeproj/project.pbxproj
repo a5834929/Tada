@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -35,19 +36,19 @@
 		2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6891FA4F8E400B85C8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* TadaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* TadaTests.m */; };
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
+		601EBBA8C33A47BCBA5FA686 /* libRNUUIDGenerator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17794A0E508D4ADEAF2D6FE7 /* libRNUUIDGenerator.a */; };
+		81590C4A5F924AEB9D3A3EE6 /* libRNCAsyncStorage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BF014633CC6415BA1D1F95C /* libRNCAsyncStorage.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		91E34DBA22601D8C001E25E1 /* RNAuthNetSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E34DB922601D8C001E25E1 /* RNAuthNetSDK.m */; };
 		91EB40452256825E0015A5C3 /* AnetEMVSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91EB401F2256825E0015A5C3 /* AnetEMVSdk.framework */; };
 		91EB40462256825E0015A5C3 /* AnetEMVSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 91EB401F2256825E0015A5C3 /* AnetEMVSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		91EB40492256861F0015A5C3 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 91EB40482256861F0015A5C3 /* libxml2.2.tbd */; };
 		91EB404D225686A50015A5C3 /* OTAUpdate.png in Resources */ = {isa = PBXBuildFile; fileRef = 91EB404A225686A50015A5C3 /* OTAUpdate.png */; };
 		91EB404E225686A50015A5C3 /* AnetEMVStoryboard.storyboardc in Resources */ = {isa = PBXBuildFile; fileRef = 91EB404B225686A50015A5C3 /* AnetEMVStoryboard.storyboardc */; };
 		91EB404F225686A50015A5C3 /* eject.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 91EB404C225686A50015A5C3 /* eject.mp3 */; };
-		A670527009AF4EF3903B1516 /* libRNAuthNetSdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 35662A09F9624F9A9E75FC82 /* libRNAuthNetSdk.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
-		81590C4A5F924AEB9D3A3EE6 /* libRNCAsyncStorage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BF014633CC6415BA1D1F95C /* libRNCAsyncStorage.a */; };
-		601EBBA8C33A47BCBA5FA686 /* libRNUUIDGenerator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17794A0E508D4ADEAF2D6FE7 /* libRNUUIDGenerator.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -317,12 +318,19 @@
 			remoteGlobalIDString = ED296FEE214C9CF800B7C4FE;
 			remoteInfo = "jsiexecutor-tvOS";
 		};
-		91EB4085225688B50015A5C3 /* PBXContainerItemProxy */ = {
+		911EF6A322601BF600FEC43F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 7670BE639F29496CBDE82BA3 /* RNAuthNetSdk.xcodeproj */;
+			containerPortal = 68AFDC7B428949478F0E15B3 /* RNUUIDGenerator.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
-			remoteInfo = RNAuthNetSdk;
+			remoteInfo = RNUUIDGenerator;
+		};
+		911EF6A822601BF600FEC43F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 675DFBD009E4404CBE9383B6 /* RNCAsyncStorage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNCAsyncStorage;
 		};
 		ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -367,14 +375,19 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Tada/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Tada/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		17794A0E508D4ADEAF2D6FE7 /* libRNUUIDGenerator.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNUUIDGenerator.a; sourceTree = "<group>"; };
+		2BF014633CC6415BA1D1F95C /* libRNCAsyncStorage.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNCAsyncStorage.a; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* Tada-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tada-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* Tada-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tada-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		35662A09F9624F9A9E75FC82 /* libRNAuthNetSdk.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNAuthNetSdk.a; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
-		7670BE639F29496CBDE82BA3 /* RNAuthNetSdk.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNAuthNetSdk.xcodeproj; path = "../node_modules/react-native-auth-net-sdk/ios/RNAuthNetSdk.xcodeproj"; sourceTree = "<group>"; };
+		675DFBD009E4404CBE9383B6 /* RNCAsyncStorage.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNCAsyncStorage.xcodeproj; path = "../node_modules/@react-native-community/async-storage/ios/RNCAsyncStorage.xcodeproj"; sourceTree = "<group>"; };
+		68AFDC7B428949478F0E15B3 /* RNUUIDGenerator.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNUUIDGenerator.xcodeproj; path = "../node_modules/react-native-uuid-generator/ios/RNUUIDGenerator.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		91E34DB922601D8C001E25E1 /* RNAuthNetSDK.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNAuthNetSDK.m; sourceTree = "<group>"; };
+		91E34DBB22601DBA001E25E1 /* RNAuthNetSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNAuthNetSDK.h; sourceTree = "<group>"; };
 		91EB401F2256825E0015A5C3 /* AnetEMVSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AnetEMVSdk.framework; sourceTree = "<group>"; };
 		91EB40482256861F0015A5C3 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
 		91EB404A225686A50015A5C3 /* OTAUpdate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OTAUpdate.png; sourceTree = "<group>"; };
@@ -383,10 +396,6 @@
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		675DFBD009E4404CBE9383B6 /* RNCAsyncStorage.xcodeproj */ = {isa = PBXFileReference; name = "RNCAsyncStorage.xcodeproj"; path = "../node_modules/@react-native-community/async-storage/ios/RNCAsyncStorage.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		2BF014633CC6415BA1D1F95C /* libRNCAsyncStorage.a */ = {isa = PBXFileReference; name = "libRNCAsyncStorage.a"; path = "libRNCAsyncStorage.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
-		68AFDC7B428949478F0E15B3 /* RNUUIDGenerator.xcodeproj */ = {isa = PBXFileReference; name = "RNUUIDGenerator.xcodeproj"; path = "../node_modules/react-native-uuid-generator/ios/RNUUIDGenerator.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		17794A0E508D4ADEAF2D6FE7 /* libRNUUIDGenerator.a */ = {isa = PBXFileReference; name = "libRNUUIDGenerator.a"; path = "libRNUUIDGenerator.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -417,7 +426,6 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
-				A670527009AF4EF3903B1516 /* libRNAuthNetSdk.a in Frameworks */,
 				81590C4A5F924AEB9D3A3EE6 /* libRNCAsyncStorage.a in Frameworks */,
 				601EBBA8C33A47BCBA5FA686 /* libRNUUIDGenerator.a in Frameworks */,
 			);
@@ -538,6 +546,8 @@
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
+				91E34DBB22601DBA001E25E1 /* RNAuthNetSDK.h */,
+				91E34DB922601D8C001E25E1 /* RNAuthNetSDK.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
@@ -613,7 +623,6 @@
 				832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */,
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
-				7670BE639F29496CBDE82BA3 /* RNAuthNetSdk.xcodeproj */,
 				675DFBD009E4404CBE9383B6 /* RNCAsyncStorage.xcodeproj */,
 				68AFDC7B428949478F0E15B3 /* RNUUIDGenerator.xcodeproj */,
 			);
@@ -656,20 +665,30 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		911EF6A022601BF600FEC43F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				911EF6A422601BF600FEC43F /* libRNUUIDGenerator.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		911EF6A522601BF600FEC43F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				911EF6A922601BF600FEC43F /* libRNCAsyncStorage.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		91EB405C225688B40015A5C3 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
 				35662A09F9624F9A9E75FC82 /* libRNAuthNetSdk.a */,
+				2BF014633CC6415BA1D1F95C /* libRNCAsyncStorage.a */,
+				17794A0E508D4ADEAF2D6FE7 /* libRNUUIDGenerator.a */,
 			);
 			name = "Recovered References";
-			sourceTree = "<group>";
-		};
-		91EB4082225688B50015A5C3 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				91EB4086225688B50015A5C3 /* libRNAuthNetSdk.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		ADBDB9201DFEBF0600ED6528 /* Products */ = {
@@ -846,8 +865,12 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
-					ProductGroup = 91EB4082225688B50015A5C3 /* Products */;
-					ProjectRef = 7670BE639F29496CBDE82BA3 /* RNAuthNetSdk.xcodeproj */;
+					ProductGroup = 911EF6A522601BF600FEC43F /* Products */;
+					ProjectRef = 675DFBD009E4404CBE9383B6 /* RNCAsyncStorage.xcodeproj */;
+				},
+				{
+					ProductGroup = 911EF6A022601BF600FEC43F /* Products */;
+					ProjectRef = 68AFDC7B428949478F0E15B3 /* RNUUIDGenerator.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1113,11 +1136,18 @@
 			remoteRef = 910023FE22567489008E25CC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		91EB4086225688B50015A5C3 /* libRNAuthNetSdk.a */ = {
+		911EF6A422601BF600FEC43F /* libRNUUIDGenerator.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libRNAuthNetSdk.a;
-			remoteRef = 91EB4085225688B50015A5C3 /* PBXContainerItemProxy */;
+			path = libRNUUIDGenerator.a;
+			remoteRef = 911EF6A322601BF600FEC43F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		911EF6A922601BF600FEC43F /* libRNCAsyncStorage.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNCAsyncStorage.a;
+			remoteRef = 911EF6A822601BF600FEC43F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */ = {
@@ -1210,6 +1240,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91E34DBA22601D8C001E25E1 /* RNAuthNetSDK.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);

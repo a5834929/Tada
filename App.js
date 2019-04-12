@@ -51,7 +51,7 @@ export default function App() {
     return;
   }, []);
 
-  const RNAuthNetSdk = NativeModules.RNAuthNetSdk;
+  const RNAuthNetSdk = NativeModules.RNAuthNetSDK;
 
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -99,6 +99,12 @@ export default function App() {
           onPress={() => RNAuthNetSdk.chargeIt().then(res => setText(res))}
           disabled={!anetIsInit}
           title="Another Mystery!"
+        />
+      </View>
+      <View style={{ margin: 5 }}>
+        <Button
+          onPress={() => RNAuthNetSdk.addEvent("Birthday party", "Someplace")}
+          title="DO NOT PRESS"
         />
       </View>
     </View>
