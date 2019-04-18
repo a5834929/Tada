@@ -152,6 +152,8 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-vector-icons')
+    implementation project(':react-native-gesture-handler')
     implementation project(':react-native-uuid-generator')
     implementation project(':@react-native-community_async-storage')
     implementation 'com.madgag.spongycastle:prov:1.53.0.0'
