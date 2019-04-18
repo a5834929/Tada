@@ -1377,11 +1377,9 @@
 					"$(PROJECT_DIR)",
 				);
 				HEADER_SEARCH_PATHS = (
-					Iphoneos/usr/include/libxml2,
-					"$(SRCROOT)/../node_modules/react-native-auth-net-sdk/ios",
+					/usr/include/libxml2,
 					"$(SRCROOT)/../node_modules/@react-native-community/async-storage/ios",
 					"$(SRCROOT)/../node_modules/react-native-uuid-generator/ios",
-					"$(SRCROOT)/../node_modules/@react-native-community/async-storage/ios",
 				);
 				INFOPLIST_FILE = Tada/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1389,6 +1387,7 @@
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
+					"-lxml2",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Tada;
@@ -1412,11 +1411,9 @@
 					"$(PROJECT_DIR)",
 				);
 				HEADER_SEARCH_PATHS = (
-					Iphoneos/usr/include/libxml2,
-					"$(SRCROOT)/../node_modules/react-native-auth-net-sdk/ios",
+					/usr/include/libxml2,
 					"$(SRCROOT)/../node_modules/@react-native-community/async-storage/ios",
 					"$(SRCROOT)/../node_modules/react-native-uuid-generator/ios",
-					"$(SRCROOT)/../node_modules/@react-native-community/async-storage/ios",
 				);
 				INFOPLIST_FILE = Tada/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1424,6 +1421,7 @@
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
+					"-lxml2",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Tada;

@@ -41,13 +41,13 @@ public class RNAuthNetSDKModule extends ReactContextBaseJavaModule {
 	return "RNAuthNetSDK";
     }
 
-    private boolean isNotInit() {
-	return (this.merchant == null);
+    private boolean isInit() {
+	return (this.merchant != null);
     }
 
     @ReactMethod
     public void initAuthNet(String env, String devID, String user, String pass, Promise promise) {
-	if (!this.isNotInit()) {
+	if (this.isInit()) {
 	    promise.reject("anet_already_init", new Exception("Authorize merchant interface already initialized!"));
 	    return;
 	}
@@ -97,7 +97,7 @@ public class RNAuthNetSDKModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void chargeIt(Promise promise) {
-	if (this.isNotInit()) {
+	if (!this.isInit()) {
 	    promise.reject("anet_not_init", new Exception("Not logged in to Authorize merchant interface!"));
 	    return;
 	}

@@ -51,7 +51,7 @@ export default function App() {
     return;
   }, []);
 
-  const RNAuthNetSdk = NativeModules.RNAuthNetSDK;
+  const RNAuthNetSDK = NativeModules.RNAuthNetSDK;
 
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -79,7 +79,7 @@ export default function App() {
       <View style={{ margin: 5 }}>
         <Button
           onPress={() =>
-            RNAuthNetSdk.initAuthNet(
+            RNAuthNetSDK.initAuthNet(
               isLive ? "live" : "test",
               deviceID,
               user,
@@ -96,7 +96,7 @@ export default function App() {
       <Text style={{ margin: 5 }}>{text.length > 0 ? text : "Nothing"}</Text>
       <View style={{ margin: 5 }}>
         <Button
-          onPress={() => RNAuthNetSdk.chargeIt().then(res => setText(res))}
+          onPress={() => RNAuthNetSDK.chargeIt().then(res => setText(res))}
           disabled={!anetIsInit}
           title="Another Mystery!"
         />
