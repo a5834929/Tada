@@ -101,12 +101,6 @@ export default function App() {
           title="Another Mystery!"
         />
       </View>
-      <View style={{ margin: 5 }}>
-        <Button
-          onPress={() => RNAuthNetSdk.addEvent("Birthday party", "Someplace")}
-          title="DO NOT PRESS"
-        />
-      </View>
     </View>
   );
 }

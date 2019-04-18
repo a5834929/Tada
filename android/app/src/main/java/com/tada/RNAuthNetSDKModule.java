@@ -133,9 +133,4 @@ public class RNAuthNetSDKModule extends ReactContextBaseJavaModule {
 	}
     }
 
-    @ReactMethod
-    public void addEvent(String name, String location) {
-	Log.i(TAG, String.format("Pretending to create an event %s at %s", name, location));
-    }
-
 }
