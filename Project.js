@@ -1,46 +1,14 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { Component, useState } from "react";
 import { StyleSheet, View, Text, Image, ActivityIndicator, NativeModules } from "react-native";
 import { Card, ListItem, Button, Icon } from "react-native-elements";
-import AsyncStorage from "@react-native-community/async-storage";
-import UUIDGenerator from "react-native-uuid-generator";
-
-async function getOrSetDeviceID(setter) {
-  try {
-    console.log("Trying to get device ID");
-    const id = await AsyncStorage.getItem("@deviceID");
-    if (id !== null) {
-      console.log(`Got device ID! ${id}`);
-      return id;
-    } else {
-      console.log("Device ID was null, generating a new one");
-      const newID = await UUIDGenerator.getRandomUUID();
-      console.log(`Generated new UUID: ${newID}`);
-      try {
-        console.log("Trying to set in storage...");
-        await AsyncStorage.setItem("@deviceID", newID);
-        console.log("Set!");
-        return newID;
-      } catch (setE) {
-        console.error(`Error setting device ID in storage! ${setE}`);
-      }
-    }
-  } catch (getE) {
-    console.error(`Error retrieving or generating device ID! ${getE}`);
-  }
-}
 
 export default function ProjectPage(props) {
-  const [text, setText] = useState("GIVE")
-  const [isLive, setIsLive] = useState(false);
+  const [text1, setText1] = useState("Authenticate Yourself");
+  const [text2, setText2] = useState("GIVE");
   const [anetIsInit, setAnetIsInit] = useState(false);
-  const [deviceID, setDeviceID] = useState(null);
   const project = props.navigation.getParam('project', {title: "No Project", abstract: "", url: ""});
-
-  useEffect(() => {
-    getOrSetDeviceID().then(setDeviceID);
-    return;
-  }, []);
-
+  const { username, password } = props.navigation.getParam('user');
+  const deviceID = props.navigation.getParam('deviceID');
   const RNAuthNetSDK = NativeModules.RNAuthNetSDK;
 
   return (
@@ -53,8 +21,25 @@ export default function ProjectPage(props) {
         />
         <Text style={{ marginBottom: 20 }}>{project.abstract}</Text>
         <Button
-          onPress={() => RNAuthNetSDK.chargeIt().then(res => console.log(res))}
-          title={text}
+          onPress={() =>
+            RNAuthNetSDK.initAuthNet(
+              "test",
+              deviceID,
+              username,
+              password
+            ).then(itWorked => {
+              setText1(`Init ${itWorked ? "worked" : "didn't work"}!`);
+              setAnetIsInit(true);
+            })
+          }
+          disabled={deviceID == null}
+          title={text1}
+        />
+        <Button
+          buttonStyle={{ marginTop: 10 }}
+          onPress={() => RNAuthNetSDK.chargeIt().then(res => setText2(res))}
+          disabled={!anetIsInit}
+          title={text2}
         />
       </Card>
     </View>
@@ -67,6 +52,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#EAF5FF"
   },
   card: {
-    marginTop: 60
-  }
+    marginTop: 30
+  },
 });

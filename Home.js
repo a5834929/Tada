@@ -2,21 +2,23 @@ import React, { Component, useState } from "react";
 import { StyleSheet, Text, View, FlatList, ActivityIndicator, Alert } from "react-native";
 import { Button, ListItem } from "react-native-elements";
 
+function truncateAbstract(str) {
+  if (!str || str.length <= 80) return str;
+  else {
+    var sub = str.substring(0, 80);
+    return sub.substring(0, sub.lastIndexOf(" ")) + "...";
+  }
+}
+
+function filterProjects(projects) {
+  return projects.filter(item => item.is_active == true && item.available_online == true);
+};
+
 export default function Home(props) {
   const [projects, setProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
-  truncateAbstract = str => {
-    if (!str || str.length <= 80) return str;
-    else {
-      var sub = str.substring(0, 80);
-      return sub.substring(0, sub.lastIndexOf(" ")) + "...";
-    }
-  };
-
-  filterProjects = projects => {
-    return projects.filter(item => item.is_active == true);
-  };
+  const user = props.navigation.getParam('user');
+  const deviceID = props.navigation.getParam('deviceID');
 
   fetchData = async () => {
     fetch("https://give.imb.org/api/projects", {
@@ -52,10 +54,6 @@ export default function Home(props) {
     } else return <ActivityIndicator size="large" color="#868686" />;
   };
 
-  alertProject = lmcid => {
-    Alert.alert(lmcid);
-  };
-
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -76,7 +74,7 @@ export default function Home(props) {
             containerStyle={{backgroundColor: '#F5FCFF'}}
             chevron
             bottomDivider
-            onPress={() => props.navigation.navigate('Project', {project: item})}
+            onPress={() => props.navigation.navigate('Project', {project: item, user: user, deviceID: deviceID})}
           />
         )}
       />
