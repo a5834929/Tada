@@ -101,6 +101,19 @@ export default function App() {
           title="Another Mystery!"
         />
       </View>
+      <View style={{ margin: 5 }}>
+        <Button
+          onPress={() => RNAuthNetSDK.quickChip().then(res => setText(res))}
+          disabled={!anetIsInit}
+          title="...will...it...CHIP?!"
+        />
+      </View>
+      <View style={{ margin: 5 }}>
+        <Button
+          onPress={() => RNAuthNetSDK.doOTAUpdate()}
+          title="Um.. update?"
+        />
+      </View>
     </View>
   );
 }

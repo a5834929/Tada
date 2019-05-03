@@ -151,6 +151,7 @@ class RNAuthNetSDK: NSObject, AuthNetDelegate {
       explode("cc type")
       return
     }
+    
     cc.cardNumber = "4111111111111111"
     cc.expirationDate = "1120"
     cc.cardCode = "123"
