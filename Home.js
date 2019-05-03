@@ -21,7 +21,7 @@ export default function Home(props) {
   const deviceID = props.navigation.getParam('deviceID');
 
   fetchData = async () => {
-    fetch("https://give.imb.org/api/projects", {
+    fetch("https://sbgive-staging-pr-1223.herokuapp.com/api/projects", {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
