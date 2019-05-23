@@ -1,10 +1,10 @@
-
-import {AppRegistry} from 'react-native';
+import { AppRegistry } from "react-native";
 import { createStackNavigator, createAppContainer } from "react-navigation";
-import {name as appName} from './app.json';
-import Home from './Home';
-import Login from './Login';
-import Project from './Project';
+import { name as appName } from "./app.json";
+import Home from "./Home";
+import Login from "./Login";
+import Project from "./Project";
+import App from "./App";
 
 const AppNavigator = createStackNavigator(
   {
@@ -17,4 +17,4 @@ const AppNavigator = createStackNavigator(
   }
 );
 
-AppRegistry.registerComponent(appName, () => createAppContainer(AppNavigator));
+AppRegistry.registerComponent(appName, () => App);

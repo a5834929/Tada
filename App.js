@@ -7,11 +7,13 @@ import {
   View,
   Button,
   TextInput,
-  Switch
+  Switch,
+  NativeEventEmitter
 } from "react-native";
 
 import AsyncStorage from "@react-native-community/async-storage";
 import UUIDGenerator from "react-native-uuid-generator";
+import IDTECH_MSR_audio from "react-native-idtech-msr-audio";
 
 async function getOrSetDeviceID(setter) {
   try {
@@ -45,10 +47,51 @@ export default function App() {
   const [isLive, setIsLive] = useState(false);
   const [anetIsInit, setAnetIsInit] = useState(false);
   const [deviceID, setDeviceID] = useState(null);
+  const [blob, setBlob] = useState("");
 
   useEffect(() => {
     getOrSetDeviceID().then(setDeviceID);
     return;
+  }, []);
+
+  useEffect(() => {
+    console.log("Starting hook for setting up card reader.");
+    const IdTechEvent = new NativeEventEmitter(NativeModules.IDTECH_MSR_audio);
+    this.idTechEventSub = IdTechEvent.addListener(
+      "IdTechUniMagEvent",
+      response => {
+        console.log(
+          `IDTECH_MSR_audio event notification: ${JSON.stringify(response)}`
+        );
+        switch (response.type) {
+          case "umConnection_connected":
+            console.log("Card reader connected. Initiating swipe detection...");
+            IDTECH_MSR_audio.swipe();
+            break;
+          case "umSwipe_receivedSwipe":
+            console.log("Successfully received swipe.");
+            console.log(`Got data: ${JSON.stringify(response.data)}`);
+            setBlob(response.data.tracks[0]);
+            break;
+          default:
+            console.log(`Unknown event type received: ${response.type}`);
+        }
+      }
+    );
+    console.log("Set this.idTechEventSub.");
+    console.log("Attempting to activate the card reader...");
+
+    IDTECH_MSR_audio.activate(4, 0, true).then(response =>
+      console.log(
+        `IDTECH_MSR_audio activation response: ${JSON.stringify(response)}`
+      )
+    );
+
+    return () => {
+      console.log(`this.idTechEventSub is: ${this.idTechEventSub}`);
+      this.idTechEventSub.remove();
+      IDTECH_MSR_audio.deactivate();
+    };
   }, []);
 
   const RNAuthNetSDK = NativeModules.RNAuthNetSDK;
@@ -96,7 +139,7 @@ export default function App() {
       <Text style={{ margin: 5 }}>{text.length > 0 ? text : "Nothing"}</Text>
       <View style={{ margin: 5 }}>
         <Button
-          onPress={() => RNAuthNetSDK.chargeIt().then(res => setText(res))}
+          onPress={() => RNAuthNetSDK.swipeIt(blob).then(res => setText(res))}
           disabled={!anetIsInit}
           title="Another Mystery!"
         />

@@ -3,6 +3,7 @@
 //  Tada
 //
 
+// Convenience class for Promise rejecting & resolving
 class Promise {
   let resolve: RCTPromiseResolveBlock
   let reject: RCTPromiseRejectBlock
@@ -13,14 +14,21 @@ class Promise {
   }
 }
 
+// Main SDK/NativeModule class
 @objc(RNAuthNetSDK)
 class RNAuthNetSDK: NSObject, AuthNetDelegate {
   
+  // --- Stored properties --- //
+
   var deviceID: String? = nil
   var anet: AuthNet? = nil
+  var sessionToken: String? = nil
   
   var loginPromise: Promise? = nil
-
+  var txnPromise: Promise? = nil
+  
+  // --- Convenience functions --- //
+  
   func isInit() -> Bool {
     if anet != nil {
       return true
@@ -34,6 +42,8 @@ class RNAuthNetSDK: NSObject, AuthNetDelegate {
     cb(err.domain, msg, err)
   }
 
+  // --- AuthNetDelegate functions --- //
+  
   @objc(mobileDeviceLoginSucceeded:)
   func mobileDeviceLoginSucceeded(_ res: MobileDeviceLoginResponse) {
     guard let p = loginPromise else {
@@ -41,18 +51,63 @@ class RNAuthNetSDK: NSObject, AuthNetDelegate {
       return
     }
     
-    print("Login response")
+    let reason = res.responseReasonText ?? ""
+    let messages = res.anetApiResponse.messages.messageArray ?? ["Nope, can't find them"]
+    
+    print("Login response: \(reason) - \(messages)")
     if res.errorType != NO_ERROR {
-      doReject(p.reject, String(describing: res.errorType), "@mobileDeviceLoginSucceeded: Got an error from Authorize!")
+      doReject(p.reject, String(describing: res.errorType), "@mobileDeviceLoginSucceeded: Got an error from Authorize! \(reason) - \(messages)")
       return
     }
     
     print("Successfully captured session token")
     anet?.sessionToken = res.sessionToken
+    self.sessionToken = res.sessionToken
     
     p.resolve(true)
     loginPromise = nil
   }
+
+  func paymentSucceeded(_ res: CreateTransactionResponse!) {
+    print("Hit @paymentSucceeded")
+
+    guard let p = txnPromise else {
+      print("@paymentSucceeded: Error! Nothing stored in txnResult!")
+      return
+    }
+    
+    let reason = res.responseReasonText ?? ""
+    let messages = res.anetApiResponse.messages.messageArray ?? ["Nope, can't find them"]
+    print("Txn API response: \(reason) - \(messages)")
+    if res.errorType != NO_ERROR {
+      doReject(p.reject, String(describing: res.errorType), "@paymentSucceeded: Got an error from Authorize! \(reason) \(messages)")
+      return
+    }
+
+    print("Charge OK")
+    p.resolve(res.transactionResponse.transId)
+    txnPromise = nil
+  }
+  
+  func requestFailed(_ res: AuthNetResponse!) {
+    print("Hit @requestFailed!")
+    
+    let reason = res.responseReasonText ?? ""
+    let messages = res.anetApiResponse.messages.messageArray ?? ["Nope, can't find them"]
+    let errString = "@requestFailed: Got an error '\(String(describing: res.errorType))' from Authorize! \(reason) - \(messages)"
+    print(errString)
+    
+    if let p = loginPromise {
+      doReject(p.reject, String(describing: res.errorType), errString)
+      loginPromise = nil
+    }
+    if let p = txnPromise {
+      doReject(p.reject, String(describing: res.errorType), errString)
+      txnPromise = nil
+    }
+  }
+
+  // --- React Native exposed functions --- //
 
   @objc(initAuthNet:devID:user:pass:resolve:reject:)
   func initAuthNet(env: String, devID: String, user: String, pass: String, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
@@ -110,14 +165,73 @@ class RNAuthNetSDK: NSObject, AuthNetDelegate {
     let txnReq = CreateTransactionRequest()
     txnReq.transactionType = AUTH_CAPTURE
     txnReq.transactionRequest = txn
-
+    txnReq.anetApiRequest.merchantAuthentication.mobileDeviceId = self.deviceID
+    txnReq.anetApiRequest.merchantAuthentication.sessionToken = self.sessionToken
+    
     anet?.purchase(with: txnReq)
-
-    resolve(true)
+    txnPromise = Promise(resolve, reject)
+    // Logic should pick up at paymentSucceeded
   }
   
+  @objc(swipeIt:resolve:reject:)
+  func swipeIt(blob: String, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
+    if !isInit() {
+      doReject(reject, "anet_not_init", "Not logged in to Authorize merchant interface!")
+      return
+    }
+    
+    print("Trying to charge it")
+    
+    let swiperData = SwiperDataType()
+    swiperData.encryptedValue = blob
+    swiperData.deviceDescription = "4649443D4944544543482E556E694D61672E416E64726F69642E53646B7631" //"FID=IDTECH.UniMag.Android.Sdkv1"
+    swiperData.encryptionType = "TDES"
 
-  @objc
+    let payment = PaymentType()
+    payment.swiperData = swiperData
+    payment.creditCard.cardNumber = nil;
+    payment.creditCard.cardCode = nil;
+    payment.creditCard.expirationDate = nil;
+    
+    let lineItem = LineItemType()
+    lineItem.itemName = "TestCharge"
+    lineItem.itemDescription = "Mobile app test charge"
+    lineItem.itemQuantity = "1"
+    lineItem.itemPrice = "0.42"
+    lineItem.itemID = "1"
+    
+    let fakeTax = ExtendedAmountType()
+    fakeTax.amount = "0"
+    fakeTax.name = "Tax"
+    
+    let fakeShipping = ExtendedAmountType()
+    fakeShipping.amount = "0"
+    fakeShipping.name = "Shipping"
+
+    let txn = TransactionRequestType()
+    txn.lineItems = [lineItem]
+    txn.amount = "0.42"
+    txn.payment = payment
+    txn.tax = fakeTax
+    txn.shipping = fakeShipping
+    txn.retail = TransRetailInfoType()
+    txn.retail.marketType = "2"
+    txn.retail.deviceType = "7"
+    
+    let txnReq = CreateTransactionRequest()
+    txnReq.transactionRequest = txn
+    txnReq.transactionType = AUTH_CAPTURE
+    txnReq.anetApiRequest.merchantAuthentication.mobileDeviceId = self.deviceID
+    txnReq.anetApiRequest.merchantAuthentication.sessionToken = self.sessionToken
+    
+    anet?.purchase(with: txnReq)
+    txnPromise = Promise(resolve, reject)
+    // Logic should pick up at paymentSucceeded
+  }
+
+  // --- Other necessary stuff --- //
+
+  @objc(requiresMainQueueSetup)
   static func requiresMainQueueSetup() -> Bool {
     return true
   }

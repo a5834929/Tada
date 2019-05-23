@@ -16,6 +16,7 @@
     "react-native": "^0.59.6",
     "react-native-elements": "^1.1.0",
     "react-native-gesture-handler": "^1.2.1",
+    "react-native-idtech-msr-audio": "git+https://github.com/oncethere/react-native-idtech-msr-audio.git",
     "react-native-uuid-generator": "^5.0.0",
     "react-native-vector-icons": "^6.4.2",
     "react-native-web": "^0.11.2",

@@ -3,6 +3,7 @@ package com.tada;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.oncethere.idtechmsraudio.IDTechMSRAudioPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import io.github.traviskn.rnuuidgenerator.RNUUIDGeneratorPackage;
@@ -27,6 +28,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
         new MainReactPackage(),
+            new IDTechMSRAudioPackage(),
         new VectorIconsPackage(),
         new RNGestureHandlerPackage(),
         new RNUUIDGeneratorPackage(),
