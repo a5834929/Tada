@@ -193,15 +193,7 @@ class RNAuthNetSDK: NSObject, AuthNetDelegate {
     payment.creditCard.cardCode = nil;
     payment.creditCard.expirationDate = nil;
     
-//    let lineItem = LineItemType()
-//    lineItem.itemName = "TestCharge"
-//    lineItem.itemDescription = "Mobile app test charge"
-//    lineItem.itemQuantity = "1"
-//    lineItem.itemPrice = amount
-//    lineItem.itemID = "1"
-
     let txn = TransactionRequestType()
-//    txn.lineItems = [lineItem]
     txn.amount = amount
     txn.payment = payment
     txn.retail = TransRetailInfoType()
