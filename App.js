@@ -44,6 +44,7 @@ export default function App() {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
   const [text, setText] = useState("");
+  const [amount, setAmount] = useState("0.01");
   const [isLive, setIsLive] = useState(false);
   const [anetIsInit, setAnetIsInit] = useState(false);
   const [deviceID, setDeviceID] = useState(null);
@@ -136,10 +137,18 @@ export default function App() {
           title="Mystery Button"
         />
       </View>
+      <TextInput
+        style={{ height: 40, margin: 5 }}
+        onChangeText={setAmount}
+        value={amount}
+        placeholder="0.01"
+      />
       <Text style={{ margin: 5 }}>{text.length > 0 ? text : "Nothing"}</Text>
       <View style={{ margin: 5 }}>
         <Button
-          onPress={() => RNAuthNetSDK.swipeIt(blob).then(res => setText(res))}
+          onPress={() =>
+            RNAuthNetSDK.swipeIt(blob, amount).then(res => setText(res))
+          }
           disabled={!anetIsInit}
           title="Another Mystery!"
         />

@@ -11,6 +11,6 @@ RCT_EXTERN_METHOD(initAuthNet:(NSString *)env devID:(NSString *)devID user:(NSSt
 
 RCT_EXTERN_METHOD(chargeIt:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject);
 
-RCT_EXTERN_METHOD(swipeIt:(NSString *)blob resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject);
+RCT_EXTERN_METHOD(swipeIt:(NSString *)blob amount:(NSString *)amount resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject);
 
 @end

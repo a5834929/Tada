@@ -173,8 +173,8 @@ class RNAuthNetSDK: NSObject, AuthNetDelegate {
     // Logic should pick up at paymentSucceeded
   }
   
-  @objc(swipeIt:resolve:reject:)
-  func swipeIt(blob: String, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
+  @objc(swipeIt:amount:resolve:reject:)
+  func swipeIt(blob: String, amount: String, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
     if !isInit() {
       doReject(reject, "anet_not_init", "Not logged in to Authorize merchant interface!")
       return
@@ -193,27 +193,17 @@ class RNAuthNetSDK: NSObject, AuthNetDelegate {
     payment.creditCard.cardCode = nil;
     payment.creditCard.expirationDate = nil;
     
-    let lineItem = LineItemType()
-    lineItem.itemName = "TestCharge"
-    lineItem.itemDescription = "Mobile app test charge"
-    lineItem.itemQuantity = "1"
-    lineItem.itemPrice = "0.42"
-    lineItem.itemID = "1"
-    
-    let fakeTax = ExtendedAmountType()
-    fakeTax.amount = "0"
-    fakeTax.name = "Tax"
-    
-    let fakeShipping = ExtendedAmountType()
-    fakeShipping.amount = "0"
-    fakeShipping.name = "Shipping"
+//    let lineItem = LineItemType()
+//    lineItem.itemName = "TestCharge"
+//    lineItem.itemDescription = "Mobile app test charge"
+//    lineItem.itemQuantity = "1"
+//    lineItem.itemPrice = amount
+//    lineItem.itemID = "1"
 
     let txn = TransactionRequestType()
-    txn.lineItems = [lineItem]
-    txn.amount = "0.42"
+//    txn.lineItems = [lineItem]
+    txn.amount = amount
     txn.payment = payment
-    txn.tax = fakeTax
-    txn.shipping = fakeShipping
     txn.retail = TransRetailInfoType()
     txn.retail.marketType = "2"
     txn.retail.deviceType = "7"
